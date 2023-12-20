@@ -24,7 +24,7 @@ class XMLWriter:
             )
             await aiodf.fsync()
             for url in urls:
-                await writer("<url><loc>{}</loc></url>\n".format(quote(url, safe=":/%"))
+                await writer("<url><loc>{}</loc></url>\n".format(quote(url, safe=":/%")))
             await aiodf.fsync()
 
             await writer("</urlset>")
