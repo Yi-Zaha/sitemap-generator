@@ -2,7 +2,7 @@ import asyncio
 from aiofile import AIOFile, Reader, Writer
 import logging
 import os
-from urllib.parse import quote
+from xml.sax.saxutils import escape
 
 
 class XMLWriter:
@@ -24,8 +24,8 @@ class XMLWriter:
             )
             await aiodf.fsync()
             for url in urls:
-                await writer("<url><loc>{}</loc></url>\n".format(url.replace(" ", "%20")))
+                await writer("  <url>\n    <loc>{}</loc>\n  </url>".format(escape(url.replace(" ", "%20"))))
             await aiodf.fsync()
 
             await writer("</urlset>")
-            await aiodf.fsync()
+            await aiodf.fsync() 
